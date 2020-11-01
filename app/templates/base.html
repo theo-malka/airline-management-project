@@ -1,0 +1,14 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Airline Management Project - Théo Malka-Lacombe</title>
+        {% endif%}
+    </head>
+    <body>
+        <div><a href="/homepage">Homepage</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
