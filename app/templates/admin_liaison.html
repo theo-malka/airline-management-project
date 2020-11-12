@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div>
+        <h1>New Connection</h1>
+    </div>
+    <br>
+    Be careful, connections are not unique . Before you insert a new connection, please check here that it's not already in  the Data Base.
+    <br>
+    You can also find the airports Ids here.
+    <br>
+    <div class="row" style="float: left; margin-bottom:20px; width: 100%">
+        <div class="col-md-4">
+            <form class="form" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form, hiddens="only") }}
+                {{ wtf.form_field(form.idaeroportdepart) }}
+                {{ wtf.form_field(form.idaeroportarrivee) }}
+                {{ wtf.form_field(form.submit) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

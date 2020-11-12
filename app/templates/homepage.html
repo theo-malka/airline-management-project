@@ -1,5 +1,50 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Welcome to the homepage</h1>
+{% block app_content %}
+    <div style="float: left; text-align:center;margin-bottom:40px; width: 100%">
+      <h1>Welcome to the Airline Management Project</h1>
+    </div>
+
+    <div style="float: left;margin-bottom:15px; width: 100%">
+        <div style="float: left; margin-bottom:30px; width: 25%">
+            <div style="float: left; text-align:center; width: 100%">
+                <h3>Manage Company</h3>
+            </div>
+            <div style="float: left; margin-left:25%; width: 50%">
+                <p><a href="/create/employe" class="btn btn-primary btn-lg btn-block" role="button">Employee</a></p>
+                <p><a href="/create/vol" class="btn btn-primary btn-lg btn-block" role="button">Flight</a></p>
+                <p><a href="/create/depart" class="btn btn-primary btn-lg btn-block" role="button">Departure</a></p>
+                <p><a href="/create/appareil" class="btn btn-primary btn-lg btn-block" role="button">Engine</a></p>
+            </div>
+        </div>
+
+        <div style="float: left; text-align:center; margin-bottom:30px; width: 25%">
+            <div style="float: left; width: 100%">
+                <h3>Visualize</h3>
+            </div>
+            <div style="float: left; margin-left:25%; width: 50%">
+                <p><a href="/visualize/personnel" class="btn btn-primary btn-lg btn-block" role="button">Staff</a></p>
+            </div>
+        </div>
+
+        <div style="float: left; text-align:center; margin-bottom:30px; width: 25%">
+            <div style="float: left; width: 100%">
+                <h3>Booking</h3>
+            </div>
+            <div style="float: left; margin-left:25%; width: 50%">
+                <p><a href="/book/billet" class="btn btn-primary btn-lg btn-block" role="button">Ticket</a></p>
+            </div>
+        </div>
+
+        <div style="float: left; text-align:center; margin-bottom:30px; width: 25%">
+            <div style="float: left; width: 100%">
+                <h3>Admin</h3>
+            </div>
+            <div style="float: left; margin-left:25%; width: 50%">
+                <p><a href="/admin/aeroport" class="btn btn-danger btn-lg btn-block" role="button">Airport</a></p>
+                <p><a href="/admin/liaison" class="btn btn-danger btn-lg btn-block" role="button">Connection</a></p>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

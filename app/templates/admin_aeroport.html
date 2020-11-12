@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div>
+        <h1>New Airport</h1>
+    </div>
+    <br>
+    Be careful, the airport code is not unique. Before you insert a new airport, please check here that it's not already in  the Data Base.
+    <br>
+    <div class="row" style="float: left; margin-bottom:20px; width: 100%">
+        <div class="col-md-4">
+            <form class="form" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form, hiddens="only") }}
+                {{ wtf.form_field(form.code) }}
+                {{ wtf.form_field(form.nom) }}
+                {{ wtf.form_field(form.pays) }}
+                {{ wtf.form_field(form.ville) }}
+                {{ wtf.form_field(form.submit) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
