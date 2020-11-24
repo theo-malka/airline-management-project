@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div style="float: left; text-align:center;margin-bottom:40px; width: 100%">
+        <h1>Create Departure</h1>
+    </div>
+    <br>
+    <div>
+        Choose a Flight which is not already associated with a Departure.
+    </div>
+    <br>
+    <form class="form" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+        <table id="flights_table" class ="table">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Departure</th>
+                    <th>Time</th>
+                    <th>Arrival</th>
+                    <th>Time</th>
+                    <th>Link</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in vols %}
+                <tr>
+                    {% if v.numero %}
+                        <td>{{ v.numero }}</td>
+                        <td>{{ v.aeroportdepart }}</td>
+                        <td>{{ v.datedepart }}</td>
+                        <td>{{ v.aeroportarrivee }}</td>
+                        <td>{{ v.datearrivee }}</td>
+                        <td>{{ v.liaison }}</td>
+                        <td><input type="radio" name="VOL" value={{ v.numero }}></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ wtf.form_field(form.submit) }}
+    </form>
+{% endblock %}

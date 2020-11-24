@@ -18,10 +18,9 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a id="btn_employe" >Employee</a></li>
-                <li><a id="btn_vols" >Flight</a></li>
+                <li><a id="btn_vol" >Flight</a></li>
                 <li><a id="btn_depart" >Departure</a></li>
-                <li><a id="btn_passager" >Customer</a></li>
-                <li><a id="btn_billet" >Staff</a></li>
+                <li><a id="btn_billet" >Tickets</a></li>
                 <li><a id="btn_liaison" >Connection</a></li>
                 <li><a id="btn_aeroport" >Airport</a></li>
                 <li><a id="btn_engine" >Engine</a></li>
@@ -29,17 +28,20 @@
         </div>
     </div>
     <div style="float: right; margin-bottom:10px; width:20%; text-align:right">
-        <input id="btnGetSelected" class="btn btn-danger btn-lg" type="submit" value="Delete">
+        <input id="btn_delete" class="btn btn-danger btn-lg" type="submit" value="Delete">
     </div>
     <table id="employee_table" class ="table" style="display:none">
         <thead>
             <tr>
                 <th>Sécurité Sociale Number</th>
-                <th>Name</th>
                 <th>Surname</th>
-                <th>Type</th>
-                <th>Function</th>
+                <th>Name</th>
+                <th>Adress</th>
+                <th>Salary</th>
+                <th>Licence  Number</th>
                 <th>Flying Time</th>
+                <th>Function</th>
+                <th>Type</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -50,10 +52,180 @@
                     <td>{{ e.numeross }}</td>
                     <td>{{ e.nom }}</td>
                     <td>{{ e.prenom }}</td>
-                    <td>{{ e.type }}</td>
-                    <td>{{ e.function }}</td>
+                    <td>{{ e.adresse }}</td>
+                    <td>{{ e.salaire }}</td>
+                    <td>{{ e.numerolicence }}</td>
                     <td>{{ e.nombreheuresvol }}</td>
-                    <td><input type="checkbox" name="A" value={{ e.numeross }}></td>
+                    <td>{{ e.fonction }}</td>
+                    <td>{{ e.type }}</td>
+                    <td><input type="checkbox" name="EMPLOYEE" value={{ e.numeross }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="airport_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in airport %}
+            <tr>
+                {% if a.id %}
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.code }}</td>
+                    <td>{{ a.nom }}</td>
+                    <td>{{ a.pays }}</td>
+                    <td>{{ a.ville }}</td>
+                    <td><input type="checkbox" name="AIRPORT" value={{ a.id }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="link_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Departure Airport</th>
+                <th></th>
+                <th></th>
+                <th>Arrival Airport</th>
+                <th></th>
+                <th></th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l in link %}
+            <tr>
+                {% if l.id %}
+                    <td>{{ l.id }}</td>
+                    <td>{{ l.codedepart }}</td>
+                    <td>{{ l.nomdepart }}</td>
+                    <td>{{ l.villedepart }}</td>
+                    <td>{{ l.codearrivee }}</td>
+                    <td>{{ l.nomarrivee }}</td>
+                    <td>{{ l.villearrivee }}</td>
+                    <td><input type="checkbox" name="LINK" value={{ l.id }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="engine_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Immatriculation Number</th>
+                <th>Type</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in engine %}
+            <tr>
+                {% if e.numeroimmatriculation %}
+                    <td>{{ e.numeroimmatriculation }}</td>
+                    <td>{{ e.type }}</td>
+                    <td><input type="checkbox" name="ENGINE" value={{ e.numeroimmatriculation }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="flight_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Departure Date</th>
+                <th>Arrival Date</th>
+                <th>Departure Airport</th>
+                <th>Arrival Airport</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in flight %}
+            <tr>
+                {% if f.numero %}
+                    <td>{{ f.numero }}</td>
+                    <td>{{ f.datedepart }}</td>
+                    <td>{{ f.datearrivee }}</td>
+                    <td>{{ f.aeroportdepart }}</td>
+                    <td>{{ f.aeroportarrivee }}</td>
+                    <td><input type="checkbox" name="FLIGHT" value={{ f.numero }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="departure_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Flight Number</th>
+                <th>Sécurité Sociale Pilot 1</th>
+                <th>Sécurité Sociale Pilot 2</th>
+                <th>Sécurité Sociale Staff 1</th>
+                <th>Sécurité Sociale Staff 2</th>
+                <th>Available Tickets</th>
+                <th>Sold Tickets</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in departure %}
+            <tr>
+                {% if d.id %}
+                    <td>{{ d.id }}</td>
+                    <td>{{ d.numerovol }}</td>
+                    <td>{{ d.sspilote1 }}</td>
+                    <td>{{ d.sspilote2 }}</td>
+                    <td>{{ d.ssequipage1 }}</td>
+                    <td>{{ d.ssequipage2 }}</td>
+                    <td>{{ d.nombreplaceslibres }}</td>
+                    <td>{{ d.nombreplacesoccupees }}</td>
+                    <td><input type="checkbox" name="DEPARTURE" value={{ d.id }}></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="ticket_table" class ="table" style="display:none">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Emission Date</th>
+                <th>Price</th>
+                <th>Departure Id</th>
+                <th>Customer Id</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in ticket %}
+            <tr>
+                {% if t.numero %}
+                    <td>{{ t.numero }}</td>
+                    <td>{{ t.dateemission }}</td>
+                    <td>{{ t.prix }}</td>
+                    <td>{{ t.departid }}</td>
+                    <td>{{ t.passagerid }}</td>
+                    <td>{{ t.customerid }}</td>
+                    <td>{{ t.customersurname }}</td>
+                    <td>{{ t.customername }}</td>
+                    <td>{{ t.customeraddress }}</td>
+                    <td><input type="checkbox" name="TICKET" value={{ t.numero }}></td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -63,7 +235,100 @@
         $(document).ready(function(){
             $('#btn_employe').click(function(){
                 $('#employee_table').toggle();
+                $('#airport_table').hide();
+                $('#link_table').hide();
+                $('#engine_table').hide();
+                $('#flight_table').hide();
+                $('#departure_table').hide();
+                $('#ticket_table').hide();
+            });
+            $('#btn_aeroport').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').toggle();
+                $('#link_table').hide();
+                $('#engine_table').hide();
+                $('#flight_table').hide();
+                $('#departure_table').hide();
+                $('#ticket_table').hide();
+            });
+            $('#btn_liaison').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').hide();
+                $('#link_table').toggle();
+                $('#engine_table').hide();
+                $('#flight_table').hide();
+                $('#departure_table').hide();
+                $('#ticket_table').hide();
+            });
+            $('#btn_engine').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').hide();
+                $('#link_table').hide();
+                $('#engine_table').toggle();
+                $('#flight_table').hide();
+                $('#departure_table').hide();
+                $('#ticket_table').hide();
+            });
+            $('#btn_vol').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').hide();
+                $('#link_table').hide();
+                $('#engine_table').hide();
+                $('#flight_table').toggle();
+                $('#departure_table').hide();
+                $('#ticket_table').hide();
+            });
+            $('#btn_depart').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').hide();
+                $('#link_table').hide();
+                $('#engine_table').hide();
+                $('#flight_table').hide();
+                $('#departure_table').toggle();
+                $('#ticket_table').hide();
+            });
+            $('#btn_billet').click(function(){
+                $('#employee_table').hide();
+                $('#airport_table').hide();
+                $('#link_table').hide();
+                $('#engine_table').hide();
+                $('#flight_table').hide();
+                $('#departure_table').hide();
+                $('#ticket_table').toggle();
+            });
+            $('#btn_delete').click(function(){
+                var em = getCheckedCheckboxes('EMPLOYEE');
+                var f = getCheckedCheckboxes('FLIGHT');
+                var d = getCheckedCheckboxes('DEPARTURE');
+                var t = getCheckedCheckboxes('TICKET');
+                var l = getCheckedCheckboxes('LINK');
+                var a = getCheckedCheckboxes('AIRPORT');
+                var en = getCheckedCheckboxes('ENGINE');
+                var deletion = {'EMPLOYEE':em,'FLIGHT':f,'DEPARTURE':d,'TICKET':t,'LINK':l,'AIRPORT':a,'ENGINE':en};
+                $.ajax({
+                    url: "/deletion",
+                    type: "POST",
+                    data: JSON.stringify(deletion),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(){
+                        window.location.href = "manage_db";
+                    }
+                });
+                console.log(deletion)
             })
+            var getCheckedCheckboxes = function(cat){
+                var result = $('input[name="' + cat + '"]:checked');
+                if (result.length > 0){
+                    var res = []
+                    result.each(function(){
+                        res.push($(this).val());
+                    });
+                }
+                else {
+                    var res = []
+                };
+                return res;
+            }
         });
     </script>
 {% endblock %}

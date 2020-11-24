@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div style="float: left; text-align:center;margin-bottom:40px; width: 100%">
+        <h1>Book a Billet</h1>
+    </div>
+    <br>
+    <div>
+        Choose a Departure
+    </div>
+    <br>
+    <form class="form" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+        <table id="departure_table" class ="table">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Departure</th>
+                    <th>City</th>
+                    <th>Date</th>
+                    <th>Arrival</th>
+                    <th>City</th>
+                    <th>Date</th>
+                    <th>Available Tickets</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in departs %}
+                <tr>
+                    {% if d.id %}
+                        <td>{{ d.numerovol }}</td>
+                        <td>{{ d.aeroportdepart }}</td>
+                        <td>{{ d.villedepart }}</td>
+                        <td>{{ d.datedepart }}</td>
+                        <td>{{ d.aeroportarrivee }}</td>
+                        <td>{{ d.villearrivee }}</td>
+                        <td>{{ d.datearrivee }}</td>
+                        <td>{{ d.nombreplaceslibres }}</td>
+                        <td><input type="radio" name="DEPART" value={{ d.id }}></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ wtf.form_field(form.submit) }}
+    </form>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div style="float: left; text-align:center;margin-bottom:40px; width: 100%">
+        <h1>Create Departure</h1>
+    </div>
+    <br>
+    <div>
+        Choose one or two Pilots and two Staff members.
+    </div>
+    <br>
+        Pilots :
+    <br>
+    <form class="form" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+        <table id="pilots_table" class ="table">
+            <thead>
+                <tr>
+                    <th>Security Social Number</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Flying Time</th>
+                    <th>Licence Number</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in pilots %}
+                <tr>
+                    {% if p.numeross %}
+                        <td>{{ p.numeross }}</td>
+                        <td>{{ p.nom }}</td>
+                        <td>{{ p.prenom }}</td>
+                        <td>{{ p.nombreheuresvol }}</td>
+                        <td>{{ p.numerolicence }}</td>
+                        <td><input type="checkbox" name="PILOTS" value={{ p.numeross }}></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+            Staff :
+        <br>
+        <table id="staff_table" class ="table">
+            <thead>
+                <tr>
+                    <th>Security Social Number</th>
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>Flying Time</th>
+                    <th>Function</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in staff %}
+                <tr>
+                    {% if s.numeross %}
+                        <td>{{ s.numeross }}</td>
+                        <td>{{ s.nom }}</td>
+                        <td>{{ s.prenom }}</td>
+                        <td>{{ s.nombreheuresvol }}</td>
+                        <td>{{ s.fonction }}</td>
+                        <td><input type="checkbox" name="STAFF" value={{ s.numeross }}></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row" style="float: left; margin-bottom:20px; width: 100%">
+            <div class="col-md-4">
+                {{ wtf.form_field(form.nombreplaceslibres) }}
+                {{ wtf.form_field(form.submit) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}

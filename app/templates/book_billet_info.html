@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <div style="float: left; text-align:center;margin-bottom:40px; width: 100%">
+        <h1>Book a Billet</h1>
+    </div>
+    <br>
+    <div>
+        Fill your information
+    </div>
+    <br>
+    <div class="row" style="float: left; margin-bottom:20px; width: 100%">
+        <div class="col-md-4">
+            <form class="form" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form, hiddens="only") }}
+                {{ wtf.form_field(form.nom) }}
+                {{ wtf.form_field(form.prenom) }}
+                {{ wtf.form_field(form.adresse) }}
+                {{ wtf.form_field(form.numero) }}
+                {{ wtf.form_field(form.prix) }}
+                {{ wtf.form_field(form.submit) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
